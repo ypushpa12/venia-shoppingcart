@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="newcss.css">
+
+<body>
+    <div id="demo">
+        <h2>Json posts</h2>
+        <button type="button" onclick="loadDoc()">JsonPosts</button>
+    </div>
+    <div>
+        <table id="display" class="table table-striped"></table>
+    </div>
+    <script>
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();
+            url = `http://jsonplaceholder.typicode.com/posts`
+            fetch(url)
+                .then(response => response.json())
+                //.then(json=>console.log(json))  
+                .then(json => displayData(json))
+        }
+        function displayData(posts) {
+            //back tick
+            data = "<tr><th>User Id</th><th>Id</th><th>Title</th></tr>"
+            for (i = 0; i < posts.length; i++) {
+                post = posts[i]
+
+                data += `<tr><td>${post.userId}</td><td>${post.id}</td><td>${post.title}</td></tr>`
+
+            }
+            document.getElementById("display").innerHTML = data;
+
+        }
+    </script>
+
+</body>
+
+</html>
